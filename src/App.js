@@ -1,13 +1,19 @@
 import { useState } from "react";
 import "./App.css";
 
+function PlayNumber(props) {
+  <button key={number} className="number">
+    {number}
+  </button>;
+}
+
 function App() {
   const [stars, setStars] = useState(utils.random(1, 9));
   return (
     <>
       <div className="game">
         {/* I will give instructions to the game by a modal that will contain all the instructions for playing the game and provide a more detailed understanding of the game */}
-        <div className="help">Instructions to play here</div>
+        <div className="help">I will put instructions on how to play here</div>
         <div className="body">
           <div className="left">
             {utils.range(1, stars).map((starId) => (
@@ -16,9 +22,7 @@ function App() {
           </div>
           <div className="right">
             {utils.range(1, 9).map((number) => (
-              <button key={number} className="number">
-                {number}
-              </button>
+              <PlayNumber />
             ))}
           </div>
         </div>
