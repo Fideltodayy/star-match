@@ -1,14 +1,55 @@
 import { useState } from "react";
 import "./App.css";
+// import PlayNumber from "./features/playNumber";
+// import StarDisplay from "./features/StarDisplay";
+// import utils from "./features/utils";
+
+//
 
 function PlayNumber(props) {
-  <button key={number} className="number">
-    {number}
-  </button>;
+  return (
+    <button
+      key={props.number}
+      style={{ backgroundColor: colors[props.status] }}
+      onClick={() => {
+        console.log("num: ", props.number);
+      }}
+      class="number"
+    >
+      {props.number}
+    </button>
+  );
 }
+
+function StarDisplay(props) {
+  return (
+    <>
+      {utils.range(1, props.stars).map((starId) => (
+        <div key={starId} class="star" />
+      ))}
+    </>
+  );
+}
+
+//
 
 function App() {
   const [stars, setStars] = useState(utils.random(1, 9));
+  const [availableNums, setavailableNums] = useState([1, 2, 3, 4, 5]);
+  const [candidateNums, setcandidateNums] = useState([2, 3]);
+
+  const candidatessAreWrong = utils.sum(candidateNums) > stars;
+
+  const numberStatus = (number) => {
+    if (!availableNums.includes(number)) {
+      return "used";
+    }
+    if (candidateNums.includes(number)) {
+      return candidatessAreWrong ? "wrong" : "candidate";
+    }
+    return "available";
+  };
+
   return (
     <>
       <div className="game">
@@ -16,13 +57,15 @@ function App() {
         <div className="help">I will put instructions on how to play here</div>
         <div className="body">
           <div className="left">
-            {utils.range(1, stars).map((starId) => (
-              <div key={starId} className="star" />
-            ))}
+            <StarDisplay stars={stars} />
           </div>
           <div className="right">
             {utils.range(1, 9).map((number) => (
-              <PlayNumber />
+              <PlayNumber
+                key={number}
+                number={number}
+                status={numberStatus(number)}
+              />
             ))}
           </div>
         </div>
