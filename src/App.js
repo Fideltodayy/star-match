@@ -64,7 +64,7 @@ function PlayNumber(props) {
 function StarDisplay(props) {
   return (
     <>
-      {utils.range(1, props.stars).map((starId) => (
+      {utils.range(1, props.count).map((starId) => (
         <div key={starId} className="star" />
       ))}
     </>
@@ -72,6 +72,12 @@ function StarDisplay(props) {
 }
 
 //
+
+const PlayAgain = (props) => {
+  <div className="restart">
+    <button onClick={props.onClick}>Play Again</button>
+  </div>;
+};
 
 function App() {
   const [showModal, setShowModal] = useState(true);
@@ -81,6 +87,13 @@ function App() {
   const [candidateNums, setcandidateNums] = useState([]);
 
   const candidatessAreWrong = utils.sum(candidateNums) > stars;
+  const gameIsDone = availableNums.length === 0;
+
+  const resetGame = () => {
+    setStars(utils.random(1, 9));
+    setavailableNums(utils.range(1, 9));
+    setcandidateNums([]);
+  };
 
   const numberStatus = (number) => {
     if (!availableNums.includes(number)) {
@@ -122,7 +135,11 @@ function App() {
         <div className="help">I will put instructions on how to play here</div>
         <div className="body">
           <div className="left">
-            <StarDisplay stars={stars} />
+            {gameIsDone ? (
+              <PlayAgain onClick={resetGame} />
+            ) : (
+              <StarDisplay count={stars} />
+            )}
           </div>
           <div className="right">
             {utils.range(1, 9).map((number) => (
