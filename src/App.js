@@ -12,21 +12,18 @@ function Modal({ showModal, setShowModal }) {
   return (
     <div className={`modal${showModal ? " show" : ""}`}>
       <div className="modal-content">
-        <span className="close" onClick={() => setShowModal(false)}>
-          &times;
-        </span>
         <h1>Instructions</h1>
         <p>
-          Welcome to Star Match! This is a simple math skills game where your
-          goal is to use all 9 numbers to match the random number of stars
-          given.
+          Welcome to <span className="highlight">Star Match!</span> This is a
+          simple math skills game where your goal is to use all 9 numbers to
+          match the random number of stars given.
         </p>
         <p>
           Here's how to play:
           <ol>
             <li>
               For each random number of stars, pick 1 or more numbers that sum
-              up to the given number.
+              up to the given number of stars.
             </li>
             <li>
               If you pick more numbers than the count of stars, they will be
@@ -55,7 +52,7 @@ function PlayNumber(props) {
       key={props.number}
       style={{ backgroundColor: colors[props.status] }}
       onClick={() => {
-        console.log("num: ", props.number);
+        props.onClick(props.number, props.status);
       }}
       className="number"
     >
@@ -80,8 +77,8 @@ function App() {
   const [showModal, setShowModal] = useState(true);
 
   const [stars, setStars] = useState(utils.random(1, 9));
-  const [availableNums, setavailableNums] = useState([1, 2, 3, 4, 5]);
-  const [candidateNums, setcandidateNums] = useState([2, 3]);
+  const [availableNums, setavailableNums] = useState(utils.range(1, 9));
+  const [candidateNums, setcandidateNums] = useState([]);
 
   const candidatessAreWrong = utils.sum(candidateNums) > stars;
 
@@ -89,16 +86,37 @@ function App() {
     if (!availableNums.includes(number)) {
       return "used";
     }
+
     if (candidateNums.includes(number)) {
       return candidatessAreWrong ? "wrong" : "candidate";
     }
     return "available";
   };
 
-  return showModal ? (
-    <Modal showModal={showModal} setShowModal={setShowModal} />
-  ) : (
+  const onNumberClick = (number, currentStatus) => {
+    if (currentStatus == "used") {
+      return; //do nothing
+    }
+    const newCandidateNums =
+      currentStatus === "available"
+        ? candidateNums.concat(number)
+        : candidateNums.filter((cn) => cn !== number);
+
+    if (utils.sum(newCandidateNums) !== stars) {
+      setcandidateNums(newCandidateNums);
+    } else {
+      const newAvailableNums = availableNums.filter(
+        (n) => !newCandidateNums.includes(n)
+      );
+      setStars(utils.randomSumIn(newAvailableNums, 9));
+      setavailableNums(newAvailableNums);
+      setcandidateNums([]);
+    }
+  };
+
+  return (
     <>
+      {showModal && <Modal showModal={showModal} setShowModal={setShowModal} />}
       <div className="game">
         {/* I will give instructions to the game by a modal that will contain all the instructions for playing the game and provide a more detailed understanding of the game */}
         <div className="help">I will put instructions on how to play here</div>
@@ -112,15 +130,17 @@ function App() {
                 key={number}
                 number={number}
                 status={numberStatus(number)}
+                onClick={onNumberClick}
               />
             ))}
           </div>
         </div>
-        <div className="timer">Time Remaining: 10</div>
-        <button onClick={() => setShowModal(!showModal)}>
-          {" "}
-          Back to manual?
-        </button>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div className="timer">Time Remaining: 10</div>
+          <button onClick={() => setShowModal(!showModal)}>
+            Back to manual?
+          </button>
+        </div>
       </div>
       <footer>
         Made with {"\u2764"} by ~

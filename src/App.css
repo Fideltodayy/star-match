@@ -102,6 +102,11 @@ footer {
   padding-bottom: 20px;
   text-align: center;
 }
+.highlight {
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 1.2em;
+}
 .modal {
   position: fixed;
   top: 50%;
@@ -116,6 +121,22 @@ footer {
   overflow-y: auto;
   box-sizing: border-box;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 600px) {
+  .modal {
+    width: 90%;
+    max-height: 90%;
+  }
+
+  .modal h1 {
+    font-size: 20px;
+  }
+
+  .modal button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
 }
 
 .modal button {
