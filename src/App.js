@@ -87,7 +87,7 @@ function PlayAgain(props) {
   );
 }
 
-function App() {
+function StarMatch(props) {
   const [showModal, setShowModal] = useState(true);
 
   const [stars, setStars] = useState(utils.random(1, 9));
@@ -107,11 +107,6 @@ function App() {
   const candidatessAreWrong = utils.sum(candidateNums) > stars;
   const gameStatus =
     availableNums.length === 0 ? "won" : secondsLeft === 0 ? "lost" : "active";
-  const resetGame = () => {
-    setStars(utils.random(1, 9));
-    setavailableNums(utils.range(1, 9));
-    setcandidateNums([]);
-  };
 
   const numberStatus = (number) => {
     if (!availableNums.includes(number)) {
@@ -125,7 +120,7 @@ function App() {
   };
 
   const onNumberClick = (number, currentStatus) => {
-    if (gameStatus !== "active" || currentStatus == "used") {
+    if (gameStatus !== "active" || currentStatus === "used") {
       return; //do nothing
     }
     const newCandidateNums =
@@ -154,7 +149,7 @@ function App() {
         <div className="body">
           <div className="left">
             {gameStatus !== "active" ? (
-              <PlayAgain onClick={resetGame} gameStatus={gameStatus} />
+              <PlayAgain onClick={props.startNewGame} gameStatus={gameStatus} />
             ) : (
               <StarDisplay count={stars} />
             )}
@@ -224,4 +219,15 @@ const utils = {
   },
 };
 
+const App = () => {
+  const [gameId, setGameId] = useState(1);
+  return (
+    <StarMatch
+      key={gameId}
+      startNewGame={() => {
+        setGameId(gameId + 1);
+      }}
+    />
+  );
+};
 export default App;
