@@ -73,11 +73,13 @@ function StarDisplay(props) {
 
 //
 
-const PlayAgain = (props) => {
-  <div className="restart">
-    <button onClick={props.onClick}>Play Again</button>
-  </div>;
-};
+function PlayAgain(props) {
+  return (
+    <div className="restart">
+      <button onClick={props.onClick}>Play Again</button>
+    </div>
+  );
+}
 
 function App() {
   const [showModal, setShowModal] = useState(true);
@@ -85,6 +87,13 @@ function App() {
   const [stars, setStars] = useState(utils.random(1, 9));
   const [availableNums, setavailableNums] = useState(utils.range(1, 9));
   const [candidateNums, setcandidateNums] = useState([]);
+  const [secondsLeft, setSecondsLeft] = useState(10);
+  //setTimeout code
+  useEffect(() => {
+    console.log("rendering...");
+
+    // return () => {};
+  });
 
   const candidatessAreWrong = utils.sum(candidateNums) > stars;
   const gameIsDone = availableNums.length === 0;
@@ -153,7 +162,7 @@ function App() {
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div className="timer">Time Remaining: 10</div>
+          <div className="timer">Time Remaining: {secondsLeft}</div>
           <button onClick={() => setShowModal(!showModal)}>
             Back to manual?
           </button>
