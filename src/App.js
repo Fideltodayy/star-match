@@ -76,6 +76,12 @@ function StarDisplay(props) {
 function PlayAgain(props) {
   return (
     <div className="restart">
+      <div
+        className="message"
+        style={{ color: props.gameStatus === "lost" ? "red" : "green" }}
+      >
+        {props.gameStatus === "lost" ? "Game Over" : "Nice"}
+      </div>
       <button onClick={props.onClick}>Play Again</button>
     </div>
   );
@@ -90,14 +96,17 @@ function App() {
   const [secondsLeft, setSecondsLeft] = useState(10);
   //setTimeout code
   useEffect(() => {
-    console.log("rendering...");
-
-    // return () => {};
+    if (secondsLeft > 0 && !showModal && availableNums.length > 0) {
+      const timerId = setTimeout(() => {
+        setSecondsLeft(secondsLeft - 1);
+      }, 1000);
+      return () => clearTimeout(timerId);
+    }
   });
 
   const candidatessAreWrong = utils.sum(candidateNums) > stars;
-  const gameIsDone = availableNums.length === 0;
-
+  const gameStatus =
+    availableNums.length === 0 ? "won" : secondsLeft === 0 ? "lost" : "active";
   const resetGame = () => {
     setStars(utils.random(1, 9));
     setavailableNums(utils.range(1, 9));
@@ -116,7 +125,7 @@ function App() {
   };
 
   const onNumberClick = (number, currentStatus) => {
-    if (currentStatus == "used") {
+    if (gameStatus !== "active" || currentStatus == "used") {
       return; //do nothing
     }
     const newCandidateNums =
@@ -144,8 +153,8 @@ function App() {
         <div className="help">I will put instructions on how to play here</div>
         <div className="body">
           <div className="left">
-            {gameIsDone ? (
-              <PlayAgain onClick={resetGame} />
+            {gameStatus !== "active" ? (
+              <PlayAgain onClick={resetGame} gameStatus={gameStatus} />
             ) : (
               <StarDisplay count={stars} />
             )}
