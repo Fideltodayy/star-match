@@ -127,6 +127,7 @@ footer {
   .modal {
     width: 90%;
     max-height: 90%;
+    z-index: 9999;
   }
 
   .modal h1 {
@@ -156,4 +157,8 @@ footer {
 .modal h1 {
   margin-bottom: 20px;
   font-size: 24px;
+}
+
+.modal-open {
+  overflow: hidden;
 }

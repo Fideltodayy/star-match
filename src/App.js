@@ -143,7 +143,7 @@ function StarMatch(props) {
   return (
     <>
       {showModal && <Modal showModal={showModal} setShowModal={setShowModal} />}
-      <div className="game">
+      <div className={`game ${showModal ? "modal-open" : ""}`}>
         {/* I will give instructions to the game by a modal that will contain all the instructions for playing the game and provide a more detailed understanding of the game */}
         <div className="help">I will put instructions on how to play here</div>
         <div className="body">
