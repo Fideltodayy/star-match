@@ -1,91 +1,10 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-// import PlayNumber from "./features/playNumber";
-// import StarDisplay from "./features/StarDisplay";
-// import utils from "./features/utils";
-
-//
-
-import React from "react";
-
-function Modal({ showModal, setShowModal }) {
-  return (
-    <div className={`modal${showModal ? " show" : ""}`}>
-      <div className="modal-content">
-        <h1>Instructions</h1>
-        <p>
-          Welcome to <span className="highlight">Star Match!</span> This is a
-          simple math skills game where your goal is to use all 9 numbers to
-          match the random number of stars given.
-        </p>
-        <p>
-          Here's how to play:
-          <ol>
-            <li>
-              For each random number of stars, pick 1 or more numbers that sum
-              up to the given number of stars.
-            </li>
-            <li>
-              If you pick more numbers than the count of stars, they will be
-              marked as wrong in red.
-            </li>
-            <li>
-              You can always unpick the candidates or wrong numbers to make the
-              correct selection.
-            </li>
-            <li>
-              Keep an eye on the timer! If it runs out and you haven't picked
-              all the numbers, the game is over.
-            </li>
-            <li>Click "PLAY AGAIN" to start a new game at any time.</li>
-          </ol>
-        </p>
-        <button onClick={() => setShowModal(false)}>Close</button>
-      </div>
-    </div>
-  );
-}
-
-function PlayNumber(props) {
-  return (
-    <button
-      key={props.number}
-      style={{ backgroundColor: colors[props.status] }}
-      onClick={() => {
-        props.onClick(props.number, props.status);
-      }}
-      className="number"
-    >
-      {props.number}
-    </button>
-  );
-}
-
-function StarDisplay(props) {
-  return (
-    <>
-      {utils.range(1, props.count).map((starId) => (
-        <div key={starId} className="star" />
-      ))}
-    </>
-  );
-}
-
-//
-
-function PlayAgain(props) {
-  return (
-    <div className="restart">
-      <div
-        className="message"
-        style={{ color: props.gameStatus === "lost" ? "red" : "green" }}
-      >
-        {props.gameStatus === "lost" ? "Game Over" : "Nice"}
-      </div>
-      <button onClick={props.onClick}>Play Again</button>
-    </div>
-  );
-}
+import Modal from "./components/Modal";
+import PlayNumber from "./features/playNumber";
+import StarDisplay from "./features/starDisplay";
+import utils from "./features/utils";
+import PlayAgain from "./features/playAgain";
 
 function StarMatch(props) {
   const [showModal, setShowModal] = useState(true);
@@ -181,43 +100,6 @@ function StarMatch(props) {
     </>
   );
 }
-
-const colors = {
-  available: "lightgray",
-  used: "lightgreen",
-  wrong: "lightcoral",
-  candidate: "deepskyblue",
-};
-
-// Math science
-const utils = {
-  // Sum an array
-  sum: (arr) => arr.reduce((acc, curr) => acc + curr, 0),
-
-  // create an array of numbers between min and max (edges included)
-  range: (min, max) => Array.from({ length: max - min + 1 }, (_, i) => min + i),
-
-  // pick a random number between min and max (edges included)
-  random: (min, max) => min + Math.floor(Math.random() * (max - min + 1)),
-
-  // Given an array of numbers and a max...
-  // Pick a random sum (< max) from the set of all available sums in arr
-  randomSumIn: (arr, max) => {
-    const sets = [[]];
-    const sums = [];
-    for (let i = 0; i < arr.length; i++) {
-      for (let j = 0, len = sets.length; j < len; j++) {
-        const candidateSet = sets[j].concat(arr[i]);
-        const candidateSum = utils.sum(candidateSet);
-        if (candidateSum <= max) {
-          sets.push(candidateSet);
-          sums.push(candidateSum);
-        }
-      }
-    }
-    return sums[utils.random(0, sums.length - 1)];
-  },
-};
 
 const App = () => {
   const [gameId, setGameId] = useState(1);
