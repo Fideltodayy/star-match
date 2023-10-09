@@ -5,6 +5,7 @@ import PlayNumber from "./features/playNumber";
 import StarDisplay from "./features/starDisplay";
 import utils from "./features/utils";
 import PlayAgain from "./features/playAgain";
+import { useTheme } from "./context/themeContext";
 
 function StarMatch(props) {
   const [showModal, setShowModal] = useState(true);
@@ -59,10 +60,15 @@ function StarMatch(props) {
     }
   };
 
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <>
       {showModal && <Modal showModal={showModal} setShowModal={setShowModal} />}
-      <div className={`game ${showModal ? "modal-open" : ""}`}>
+      <div className={`game ${theme} ${showModal ? "modal-open" : ""}`}>
+        <button className={`App ${theme}`} onClick={toggleTheme}>
+          Toggle theme
+        </button>
         {/* I will give instructions to the game by a modal that will contain all the instructions for playing the game and provide a more detailed understanding of the game */}
         <div className="help">I will put instructions on how to play here</div>
         <div className="body">
