@@ -39,10 +39,6 @@ body {
   .body {
     display: block;
   }
-  .dark {
-    background-color: #333;
-    color: #fff;
-  }
 
   .left,
   .right {
@@ -165,4 +161,9 @@ footer {
 
 .modal-open {
   overflow: hidden;
+}
+
+.dark {
+  background-color: #333;
+  color: #fff;
 }
