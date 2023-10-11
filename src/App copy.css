@@ -1,27 +1,22 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 * {
   margin: 0;
   padding: 0;
-}
+} */
 
-.game {
-  max-width: 500px;
-  margin: 10% auto;
-}
-
-.body {
+/* .body {
   display: flex;
-}
+} */
 
-.help {
+/* .help {
   color: #666;
   margin: 10px;
   text-align: center;
-}
+} */
 
-.left {
+/* .left {
   text-align: center;
   width: 50%;
   border: thin solid #ddd;
@@ -32,27 +27,28 @@
   padding: 10px;
   width: 50%;
   border: thin solid #ddd;
-}
+} */
 
-@media screen and (max-width: 600px) {
-  .body {
+/* @media screen and (max-width: 600px) {
+  /* .body {
     display: block;
-  }
+  } */
 
-  .left,
+/* .left,
   .right {
     width: 100%;
     border: none !important;
     text-align: center;
-  }
-  .star {
+  } */
+/* .star {
     display: block;
     margin: 0 auto;
-  }
-  .number {
+  } */
+/* .number {
     width: 60px;
-  }
-}
+  } */
+/* }  */
+
 .star {
   display: inline-block;
   margin: 0 15px;
@@ -63,32 +59,32 @@
   font-size: 45px;
 }
 
-.number {
+/* .number {
   background-color: #eee;
   border: thin solid #ddd;
   width: 45px;
   height: 45px;
   margin: 10px;
   font-size: 25px;
-}
+} */
 
-.number:focus,
+/* .number:focus,
 .number:active {
   outline: none;
   border: thin solid #ddd;
-}
+} */
 
-.timer {
+/* .timer {
   color: #666;
   margin-top: 3px;
   margin-left: 3px;
-}
+} */
 
-.game-done .message {
+/* .game-done .message {
   font-size: 250%;
   font-weight: bold;
   margin: 15px;
-}
+} */
 
 a {
   text-decoration: none;
@@ -162,6 +158,11 @@ footer {
   overflow: hidden;
 }
 
+.dark {
+  background-color: #333;
+  color: #fff;
+}
+
 .mainbody {
   height: 100vh;
   margin: 0;
@@ -169,15 +170,7 @@ footer {
 }
 html {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
   padding: 0;
   margin: 0;
-}
-
-#root {
-  height: 100vh;
-  padding: 0;
-  margin: 0;
-  border: #0074d9;
-  border-radius: 20%;
 }
