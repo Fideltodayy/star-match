@@ -44,10 +44,11 @@
     display: block;
     margin: 0 auto;
   } */
-/* .number {
-    width: 60px;
-  } */
-/* }  */
+.number {
+  width: 50px;
+}
+*/
+/* } 
 
 .star {
   display: inline-block;
