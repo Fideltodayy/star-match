@@ -68,23 +68,23 @@
   font-size: 25px;
 } */
 
-/* .number:focus,
+.number:focus,
 .number:active {
   outline: none;
   border: thin solid #ddd;
-} */
+}
 
-/* .timer {
+.timer {
   color: #666;
   margin-top: 3px;
   margin-left: 3px;
-} */
+}
 
-/* .game-done .message {
+.game-done .message {
   font-size: 250%;
   font-weight: bold;
   margin: 15px;
-} */
+}
 
 a {
   text-decoration: none;
