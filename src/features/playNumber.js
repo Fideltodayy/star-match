@@ -7,7 +7,7 @@ function PlayNumber(props) {
       onClick={() => {
         props.onClick(props.number, props.status);
       }}
-      className="number"
+      className="number dark:text-black"
     >
       {props.number}
     </button>

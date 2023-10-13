@@ -2,15 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
-* {
-  margin: 0;
-  padding: 0;
-}
 
 .game {
   max-width: 500px;
   margin: auto;
-  height: 100vh;
 }
 
 .body {
@@ -160,20 +155,14 @@ a {
 }
 
 html {
-  position: relative;
   height: 100vh;
   padding: 0;
   margin: 0;
 }
-* {
-  margin: 0;
-  padding: 0;
-}
 
 .marquee-content {
-  overflow: hidden;
   white-space: nowrap;
-  animation: marquee 60s linear infinite;
+  animation: marquee 20s linear infinite;
 }
 
 @keyframes marquee {

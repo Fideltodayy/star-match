@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <DarkModeProvider>
-      <div className=" bg-slate-100 dark:bg-slate-900 text-black dark:text-white">
+      <div className=" bg-slate-300 dark:bg-slate-900 text-black dark:text-white">
         <App />
         <footer className=" text-center flex justify-center">
           <span style={{ fontFamily: "Kalam" }}>Made with</span>
