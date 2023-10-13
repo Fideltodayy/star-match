@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./App.css";
 import Modal from "./components/Modal";
 import PlayNumber from "./features/playNumber";
 import StarDisplay from "./features/starDisplay";
 import utils from "./features/utils";
 import PlayAgain from "./features/playAgain";
-import { useTheme } from "./context/themeContext";
-
+import { DarkModeContext } from "./context/themeContext";
+import { BsSun } from "react-icons/bs";
+import { BsMoonStarsFill } from "react-icons/bs";
 function StarMatch(props) {
   const [showModal, setShowModal] = useState(true);
 
@@ -60,49 +61,73 @@ function StarMatch(props) {
     }
   };
 
-  const { theme, toggleTheme } = useTheme();
+  const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
 
   return (
     <>
       {showModal && <Modal showModal={showModal} setShowModal={setShowModal} />}
-      <div className={`game ${theme} ${showModal ? "modal-open" : ""}`}>
-        <button className={`App ${theme}`} onClick={toggleTheme}>
-          Toggle theme
-        </button>
-        {/* I will give instructions to the game by a modal that will contain all the instructions for playing the game and provide a more detailed understanding of the game */}
-        <div className="help">I will put instructions on how to play here</div>
-        <div className="body">
-          <div className="left">
-            {gameStatus !== "active" ? (
-              <PlayAgain onClick={props.startNewGame} gameStatus={gameStatus} />
+      <div className={`game h-screen ${showModal ? "modal-open" : ""}`}>
+        <div className="flex justify-between items-center h-16 mx-4 px-4 bg-slate-200 dark:bg-gray-800  rounded-full border-2 border-gray-600">
+          <div>
+            <h2 className=" text-3xl" style={{ fontFamily: "Dancing Script" }}>
+              Star-Match
+            </h2>
+          </div>
+          <div>
+            {darkMode ? (
+              <BsMoonStarsFill onClick={toggleDarkMode} className="" />
             ) : (
-              <StarDisplay count={stars} />
+              <BsSun onClick={toggleDarkMode} className="" />
             )}
           </div>
-          <div className="right">
-            {utils.range(1, 9).map((number) => (
-              <PlayNumber
-                key={number}
-                number={number}
-                status={numberStatus(number)}
-                onClick={onNumberClick}
-              />
-            ))}
+        </div>
+
+        <div className=" centerbody">
+          {/* I will give instructions to the game by a modal that will contain all the instructions for playing the game and provide a more detailed understanding of the game */}
+          <div
+            className="marquee-content text-lg"
+            style={{ fontFamily: "Kalam" }}
+          >
+            <span>
+              For each random number of stars, pick 1 or more numbers that sum
+              up to the given number of stars. If you pick more numbers than the
+              count of stars, they will be marked as wrong in red. You can
+              always unpick the candidates or wrong numbers to make the correct
+              selection. Keep an eye on the timer! If it runs out and you
+              haven't picked all the numbers, the game is over. Click "PLAY
+              AGAIN" to start a new game at any time.
+            </span>
+          </div>
+          <div className="body">
+            <div className="left">
+              {gameStatus !== "active" ? (
+                <PlayAgain
+                  onClick={props.startNewGame}
+                  gameStatus={gameStatus}
+                />
+              ) : (
+                <StarDisplay count={stars} />
+              )}
+            </div>
+            <div className="right">
+              {utils.range(1, 9).map((number) => (
+                <PlayNumber
+                  key={number}
+                  number={number}
+                  status={numberStatus(number)}
+                  onClick={onNumberClick}
+                />
+              ))}
+            </div>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div className="timer">Time Remaining: {secondsLeft}</div>
+            <button onClick={() => setShowModal(!showModal)}>
+              Back to manual?
+            </button>
           </div>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div className="timer">Time Remaining: {secondsLeft}</div>
-          <button onClick={() => setShowModal(!showModal)}>
-            Back to manual?
-          </button>
-        </div>
       </div>
-      <footer>
-        Made with {"\u2764"} by ~
-        <a href="https://twitter.com/Fideltodayy" target="blank">
-          Fideltodayy
-        </a>
-      </footer>
     </>
   );
 }

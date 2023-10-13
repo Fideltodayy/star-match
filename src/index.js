@@ -1,16 +1,30 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { ThemeProvider } from "./context/themeContext";
+import { DarkModeProvider } from "./context/themeContext";
+import { BsTwitter } from "react-icons/bs";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
+    <DarkModeProvider>
+      <div className=" bg-slate-300 dark:bg-slate-900 text-black dark:text-white">
+        <App />
+        <footer className=" text-center flex justify-center">
+          <span style={{ fontFamily: "Kalam" }}>Made with</span>
+          {"\u2764"} <span style={{ fontFamily: "Kalam" }}>by </span>
+          <a
+            href="https://twitter.com/Fideltodayy"
+            target="blank"
+            className=" mx-4"
+          >
+            Fideltodayy
+          </a>
+          <BsTwitter className=" p-0 ml-2" />
+        </footer>
+      </div>
+    </DarkModeProvider>
   </React.StrictMode>
 );
 
