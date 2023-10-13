@@ -1,0 +1,193 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.game {
+  max-width: 500px;
+  margin: auto;
+  height: 100vh;
+}
+
+.body {
+  display: flex;
+}
+
+.help {
+  color: #666;
+  margin: 10px;
+  text-align: center;
+}
+
+.left {
+  text-align: center;
+  width: 50%;
+  border: thin solid #ddd;
+}
+
+.right {
+  text-align: center;
+  padding: 10px;
+  width: 50%;
+  border: thin solid #ddd;
+}
+
+@media screen and (max-width: 600px) {
+  .body {
+    display: block;
+  }
+
+  .left,
+  .right {
+    width: 100%;
+    border: none !important;
+    text-align: center;
+  }
+  .star {
+    display: block;
+    margin: 0 auto;
+  }
+  .number {
+    width: 60px;
+  }
+}
+.star {
+  display: inline-block;
+  margin: 0 15px;
+}
+
+.star:after {
+  content: "\2605";
+  font-size: 45px;
+}
+
+.number {
+  background-color: #eee;
+  border: thin solid #ddd;
+  width: 45px;
+  height: 45px;
+  margin: 10px;
+  font-size: 25px;
+}
+
+.number:focus,
+.number:active {
+  outline: none;
+  border: thin solid #ddd;
+}
+
+.timer {
+  color: #666;
+  margin-top: 3px;
+  margin-left: 3px;
+}
+
+.game-done .message {
+  font-size: 250%;
+  font-weight: bold;
+  margin: 15px;
+}
+
+a {
+  text-decoration: none;
+  color: #0074d9;
+}
+
+.highlight {
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 80%;
+  max-height: 80%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+}
+
+@media screen and (max-width: 600px) {
+  .modal {
+    width: 90%;
+    max-height: 90%;
+    z-index: 9999;
+  }
+
+  .modal h1 {
+    font-size: 20px;
+  }
+
+  .modal button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+.modal button {
+  background-color: #0074d9;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.modal button:hover {
+  background-color: #0056b3;
+}
+
+.modal h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+html {
+  position: relative;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+.marquee-container {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: #f8f8f8;
+  padding: 10px;
+}
+
+.marquee-content {
+  position: absolute;
+  display: inline-block;
+  animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
