@@ -8,7 +8,8 @@
 
 .game {
   max-width: 500px;
-  margin: 10% auto;
+  padding: 10% auto;
+  height: 100vh;
 }
 
 .body {
@@ -162,22 +163,32 @@ footer {
   overflow: hidden;
 }
 
-.mainbody {
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-}
 html {
   position: relative;
   height: 100vh;
   padding: 0;
   margin: 0;
 }
-
-#root {
-  height: 100vh;
-  padding: 0;
+* {
   margin: 0;
-  border: #0074d9;
-  border-radius: 20%;
+  padding: 0;
+}
+
+:root {
+  --dark-card-shadow: 0px 20px 100px -10px rgba(30, 32, 54, 0.1);
+
+  --dark-gradient: linear-gradient(
+    144.39deg,
+    #1e2036 -278.56%,
+    #1e2036 -78.47%,
+    #1e2036 91.61%
+  );
+}
+.cardbody {
+  box-shadow: var(--dark-card-shadow);
+}
+.dark .cardbody {
+  background: var(--dark-gradient);
+  background-size: 200% 200%;
+  animation: waveAnimation 10s ease infinite;
 }

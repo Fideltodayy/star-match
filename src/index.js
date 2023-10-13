@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import "./App.css";
 import reportWebVitals from "./reportWebVitals";
-import { ThemeProvider } from "./context/themeContext";
-
+import { DarkModeProvider } from "./context/themeContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
+    <DarkModeProvider>
+      <div className=" dark:bg-slate-900 text-black dark:text-white">
+        <App />
+      </div>
+    </DarkModeProvider>
   </React.StrictMode>
 );
 
