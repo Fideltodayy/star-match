@@ -21,14 +21,12 @@
 .left {
   text-align: center;
   width: 50%;
-  border: thin solid #ddd;
 }
 
 .right {
   text-align: center;
   padding: 10px;
   width: 50%;
-  border: thin solid #ddd;
 }
 
 @media screen and (max-width: 600px) {
