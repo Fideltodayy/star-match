@@ -21,7 +21,7 @@ root.render(
           >
             Fideltodayy
           </a>
-          <BsTwitter className=" p-0 ml-2" />
+          <BsTwitter className=" p-0 ml-1" />
         </footer>
       </div>
     </DarkModeProvider>
