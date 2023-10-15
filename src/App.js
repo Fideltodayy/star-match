@@ -98,8 +98,8 @@ function StarMatch(props) {
               AGAIN" to start a new game at any time.
             </span>
           </div>
-          <div className="body">
-            <div className="left">
+          <div className="body rounded-xl  shadow-2xl shadow-slate-200 dark:shadow-slate-700">
+            <div className="left ">
               {gameStatus !== "active" ? (
                 <PlayAgain
                   onClick={props.startNewGame}
@@ -109,7 +109,7 @@ function StarMatch(props) {
                 <StarDisplay count={stars} />
               )}
             </div>
-            <div className="right">
+            <div className="right ">
               {utils.range(1, 9).map((number) => (
                 <PlayNumber
                   key={number}
