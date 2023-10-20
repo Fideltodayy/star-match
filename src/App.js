@@ -66,7 +66,11 @@ function StarMatch(props) {
   return (
     <>
       {showModal && <Modal showModal={showModal} setShowModal={setShowModal} />}
-      <div className={`game h-screen ${showModal ? "modal-open" : ""}`}>
+      <div
+        className={`game h-screen overflow-hidden ${
+          showModal ? "modal-open" : ""
+        }`}
+      >
         <div className="flex justify-between items-center h-16 mx-4 px-4 bg-slate-200 dark:bg-gray-800  rounded-full border-2 border-gray-600">
           <div>
             <h2 className=" text-3xl" style={{ fontFamily: "Dancing Script" }}>
@@ -88,7 +92,7 @@ function StarMatch(props) {
             className="marquee-content text-lg"
             style={{ fontFamily: "Kalam" }}
           >
-            <span>
+            <span className="md:block overflow-x-hidden">
               For each random number of stars, pick 1 or more numbers that sum
               up to the given number of stars. If you pick more numbers than the
               count of stars, they will be marked as wrong in red. You can
