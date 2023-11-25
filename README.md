@@ -2,7 +2,7 @@
 Star-Match
 
 Star-Match Game is a simple math skills game where your goal is to use all 9 numbers to match the random number of stars given
-You can preview it in the link below:
+You can preview it using the link below:
 https://fidels-star-match-game.netlify.app/
 
 ## Technical tools
